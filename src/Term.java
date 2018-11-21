@@ -28,7 +28,13 @@ public class Term implements Comparable<Term> {
 	 */
 	public Term(String word, double weight) {
 		// TODO: Complete Term constructor
+		if (word == null) {
+			throw new NullPointerException("Parameter Type cannot be null");
+		}
 		
+		if (weight < 0) {
+			throw new IllegalArgumentException("Your weight is negative");
+		}
 		myWord = word;
 		myWeight = weight;
 	}
@@ -86,7 +92,30 @@ public class Term implements Comparable<Term> {
 		 */
 		public int compare(Term v, Term w) {
 			// TODO: Implement compare
+			String vprefix = v.myWord;
+			String wprefix = w.myWord;
+			int order = myPrefixSize;
+			if (myPrefixSize > vprefix.length() && myPrefixSize <= wprefix.length()) {
+				order = vprefix.length();
+
+			}
 			
+			if (myPrefixSize > wprefix.length() && myPrefixSize <= vprefix.length()) {
+				order = wprefix.length();
+
+			}
+			
+			
+			for (int i = 0; i<order; i++) {
+				if (vprefix.charAt(i) - wprefix.charAt(i) > 0) {
+					return 1;
+				}
+				
+				if (wprefix.charAt(i) - vprefix.charAt(i) > 0) {
+					return -1;
+				}
+			}
+
 			return 0;
 		}
 	
@@ -99,10 +128,21 @@ public class Term implements Comparable<Term> {
 	 *
 	 */
 	public static class ReverseWeightOrder implements Comparator<Term> {
+		
 		public int compare(Term v, Term w) {
 			// TODO: implement compare
+			double numberv = v.getWeight();
+			double numberw = w.getWeight();
+			if (numberv>numberw) {
+				return -1;
+			}
+
+			if (numberv < numberw) {
+				return 1;
+			}
 			
 			return 0;
+
 		}
 	}
 
@@ -114,9 +154,18 @@ public class Term implements Comparable<Term> {
 	 */
 	public static class WeightOrder implements Comparator<Term> {
 		public int compare(Term v, Term w) {
-			// TODO: implement compare
+			double numberv = v.getWeight();
+			double numberw = w.getWeight();
+			if (numberv>numberw) {
+				return 1;
+			}
+
+			if (numberv < numberw) {
+				return -1;
+			}
 			
 			return 0;
+
 		}
 	}
 }
