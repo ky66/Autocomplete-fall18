@@ -83,7 +83,9 @@ public class BinarySearchLibrary {
 		
 		int low = 0;
 		int high = list.size();
-		
+		if (list.size() == 0) {
+			return -1;
+		}
 		// target in [low,high)
 		// TODO: complete method
 		
