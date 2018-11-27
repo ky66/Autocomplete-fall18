@@ -1,11 +1,49 @@
 Put your name and netid here
+Kamyar Yazdani ky66
 
 (1) Run the program BenchmarkForAutocomplete and copy/paste the 
 results here this for #matches = 20
 
+search	size	#match	binary	brute
+		456976		20	0.0051	0.0080
+	a	 17576		20	0.0002	0.0062
+	b	 17576		20	0.0001	0.0045
+	c	 17576		20	0.0001	0.0032
+	x	 17576		20	0.0001	0.0031
+	y	 17576		20	0.0001	0.0030
+	z	 17576		20	0.0001	0.0030
+	aa	   676		20	0.0000	0.0029
+	az	   676		20	0.0000	0.0029
+	za	   676		20	0.0000	0.0036
+    zz	   676		20	0.0000	0.0031
+
+
 (2) Run the program again for #matches = 10000, paste the results, 
 and then make any conclusions about how the # matches 
 effects the runtime. 
+
+search	size	#match	binary	brute
+		456976	10000	0.0190	0.0223
+a		17576	10000	0.0040	0.0088
+b		17576	10000	0.0036	0.0067
+c		17576	10000	0.0037	0.0075
+x		17576	10000	0.0037	0.0065
+y		17576	10000	0.0037	0.0071
+z		17576	10000	0.0038	0.0066
+aa		676		10000	0.0001	0.0030
+az		676		10000	0.0001	0.0031
+za		676		10000	0.0001	0.0035
+zz		676		10000	0.0001	0.0039
+
+- The higher number of matches of course means more items to sort which means for both the brute 
+brute force method and the binary method it would take a higher time to sort which is natural and that is
+what we see in the output. Also, the size of the text matters a lot too as for brute it takes N times but for
+binary it takes log(n) times so we should see a more dramatic time difference for the higher number of matches
+in the brute force method which is exactly what we see here. This event can be seen looking 
+at the fact that binary becomes way faster than the brute method for the 20 matches case.
+
+
+
 
 (3) Copy/paste the code from BruteAutocomplete.topMatches below. 
 Explain what the Big-Oh complexity of the entire loop: 
@@ -14,6 +52,10 @@ is in terms of N, the number of elements in myTerms and
 M, the number of terms that match the prefix. 
 Assume that every priority-queue operation runs in O(log k) time. 
 Explain your answer which should be in terms of N, M, and k.
+
+
+
+
 
 (4) Explain why the last for loop in BruteAutocomplete.topMatches 
 uses a LinkedList (and not an ArrayList) 
