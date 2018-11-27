@@ -106,6 +106,7 @@ public class Term implements Comparable<Term> {
 			}
 			
 			
+			
 			for (int i = 0; i<order; i++) {
 				if (vprefix.charAt(i) - wprefix.charAt(i) > 0) {
 					return 1;

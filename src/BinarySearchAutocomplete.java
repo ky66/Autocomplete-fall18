@@ -63,6 +63,7 @@ public class BinarySearchAutocomplete implements Autocompletor {
 	public static int firstIndexOf(Term[] a, Term key, Comparator<Term> comparator) {	
 		int index = BinarySearchLibrary.firstIndex(Arrays.asList(a), key, comparator);
 		return index;
+		
 	}
 
 	/**
@@ -106,7 +107,36 @@ public class BinarySearchAutocomplete implements Autocompletor {
 	@Override
 	public List<Term> topMatches(String prefix, int k) {
 
-		ArrayList<Term> list = new ArrayList<>();
-		return list;
+		if (prefix == null) {
+			throw new NullPointerException("Prefix is null");
+		}
+		
+		int first = firstIndexOf(myTerms, new Term(prefix,0.0), new Term.PrefixOrder(prefix.length()));
+		
+		int last = lastIndexOf(myTerms, new Term(prefix,0.0), new Term.PrefixOrder(prefix.length()));
+		List<Term> newlist = new ArrayList<>();
+		
+		for (int i = first; i<last+1;i++) {
+			newlist.add(myTerms[i]);
+		}
+//		System.out.println(prefix);
+		System.out.println(newlist);
+		System.out.println(first);
+		System.out.println(last);
+//		List<Term> newlist = Arrays.asList(myTerms).subList(first, last+1);
+		if (first == -1 || last == -1) {
+			return newlist;
+		}
+		
+		Collections.sort(newlist,new Term.WeightOrder());
+//		System.out.print(newlist);
+		
+		if (newlist.size()>k) {
+			return newlist.subList(0, k);
+		}
+		return newlist;
+
+
+		
 	}
 }
