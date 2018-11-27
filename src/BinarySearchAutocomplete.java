@@ -115,7 +115,9 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		
 		int last = lastIndexOf(myTerms, new Term(prefix,0.0), new Term.PrefixOrder(prefix.length()));
 		List<Term> newlist = new ArrayList<>();
-		
+		if (first == -1 || last == -1) {
+			return newlist;
+		}
 		for (int i = first; i<last+1;i++) {
 			newlist.add(myTerms[i]);
 		}
@@ -124,11 +126,8 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		System.out.println(first);
 		System.out.println(last);
 //		List<Term> newlist = Arrays.asList(myTerms).subList(first, last+1);
-		if (first == -1 || last == -1) {
-			return newlist;
-		}
-		
-		Collections.sort(newlist,new Term.WeightOrder());
+	
+		Collections.sort(newlist,new Term.ReverseWeightOrder());
 //		System.out.print(newlist);
 		
 		if (newlist.size()>k) {
