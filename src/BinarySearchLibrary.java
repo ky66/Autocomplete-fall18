@@ -54,7 +54,7 @@ public class BinarySearchLibrary {
 //		 if (Character.toString(target.toString().charAt(target.toString().length())).equals(" ")) {
 //			 return -1;
 //		 }
-		 
+		 //check if high in bounds
 		 if (comp.compare(list.get(high),target) == 0) {
 			 return (high);
 		 }

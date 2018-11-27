@@ -92,6 +92,11 @@ public class Term implements Comparable<Term> {
 		 */
 		public int compare(Term v, Term w) {
 			// TODO: Implement compare
+//			if (v.toString().length()<w.toString().length()) {
+//				return -1;
+//			}
+			
+			
 			String vprefix = v.myWord;
 			String wprefix = w.myWord;
 			int order = myPrefixSize;
@@ -115,10 +120,19 @@ public class Term implements Comparable<Term> {
 				if (wprefix.charAt(i) - vprefix.charAt(i) > 0) {
 					return -1;
 				}
+
+			}
+			if (order!= myPrefixSize) {
+			if (vprefix.length()>wprefix.length()) {
+				return 1;
+			}
+			if (vprefix.length()<wprefix.length()) {
+				return -1;
+			}
 			}
 
 			return 0;
-		}
+			}
 	
 	}
 
