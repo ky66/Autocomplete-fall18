@@ -100,14 +100,11 @@ public class Term implements Comparable<Term> {
 			String vprefix = v.myWord;
 			String wprefix = w.myWord;
 			int order = myPrefixSize;
-			if (myPrefixSize > vprefix.length() && myPrefixSize <= wprefix.length()) {
-				order = vprefix.length();
 
-			}
 			
-			if (myPrefixSize > wprefix.length() && myPrefixSize <= vprefix.length()) {
-				order = wprefix.length();
-
+			if (myPrefixSize >wprefix.length() || myPrefixSize > vprefix.length()) {
+				order = Math.min(wprefix.length(), vprefix.length());
+				
 			}
 			
 			
